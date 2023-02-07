@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class InitiativeTrackerManager : MonoBehaviour
 {
 
-    private int _trackerCurrentActive;
-
+    private int _trackerCurrentActiveTurn;
+    
+    [SerializeField] private int _totalActiveCharacters;
     [SerializeField] private GameObject _enemy;
     [SerializeField] private GameObject _player1;
     [SerializeField] private GameObject _player2;
@@ -15,22 +16,19 @@ public class InitiativeTrackerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _trackerCurrentActive = 1;
+        _trackerCurrentActiveTurn = 1;
+        Debug.Log($"Character" + _trackerCurrentActiveTurn + "'s Turn!");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FinishTurnButton()
     {
-        
+        _trackerCurrentActiveTurn += 1;
+        if(_trackerCurrentActiveTurn > _totalActiveCharacters)
+        {
+            _trackerCurrentActiveTurn = 1;
+        }
+
+        Debug.Log($"Character"+ _trackerCurrentActiveTurn + "'s Turn!");
     }
 
-    private void FinishTurnButton()
-    {
-
-    }
-
-    private void StartOfTurn()
-    {
-
-    }
 }
